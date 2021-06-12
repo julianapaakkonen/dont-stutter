@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Help"
+    android:background="@drawable/background">
+
+    <!-- Help screen -->
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TableRow>
+            <!-- Back button -->
+            <Button
+                android:id="@+id/backButton"
+                android:onClick="backClicked"
+                style="@style/basicButtonWide"
+                android:backgroundTint="@color/lightpink"
+                android:text="Back" />
+        </TableRow>
+        <TableRow>
+            <!-- Instructions -->
+            <TextView
+                android:id="@+id/helpText"
+                android:gravity="center"
+                style="@style/basicText"
+                android:text="The rules are simple:\n\nTap a letter to place it in a blue box\n
+                            \nTap a blue box to remove the letter\n\nTap GUESS when you are done\n
+                            \nThe game recognizes the most common English words\n
+                            \nYou can always SKIP a word\nbut by doing so you will lose one heart\n
+                            \nLose all hearts and the game is over\n\n\nHAVE FUN!" />
+        </TableRow>
+    </TableLayout>
+</LinearLayout>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Profile"
+    android:layout_gravity="center"
+    android:background="@drawable/backgroundmain">
+
+    <!-- Profiles -->
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="0,1"
+        android:layout_margin="5dp">
+        <TableRow>
+            <!-- Back button -->
+            <Button
+                android:id="@+id/backButton"
+                android:onClick="backClicked"
+                style="@style/basicButtonNarrow"
+                android:backgroundTint="@color/lightpink"
+                android:text="Back" />
+            <!-- New (profile) button -->
+            <Button
+                android:id="@+id/addButton"
+                android:onClick="addClicked"
+                style="@style/basicButtonNarrow"
+                android:backgroundTint="@color/importantpink"
+                android:text="New" />
+        </TableRow>
+    </TableLayout>
+
+    <!-- Displays currently active profile -->
+    <TextView
+        android:id="@+id/activeprof"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        style="@style/basicText"
+        android:text="No active profile" />
+
+    <!-- Profiles -->
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp" />
+</LinearLayout>
+

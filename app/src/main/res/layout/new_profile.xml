@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".NewProfile"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:background="@drawable/backgroundmain">
+
+    <!-- New profile screen -->
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="0,1"
+        android:layout_margin="5dp"
+        android:gravity="top">
+        <TableRow>
+            <!-- Back button -->
+            <Button
+                android:id="@+id/backButton"
+                android:onClick="backClicked"
+                android:layout_width="wrap_content"
+                style="@style/basicButtonNarrow"
+                android:backgroundTint="@color/lightpink"
+                android:text="Back" />
+            <!-- Save button -->
+            <Button
+                android:id="@+id/submitButton"
+                android:onClick="submitClicked"
+                android:layout_width="wrap_content"
+                style="@style/basicButtonNarrow"
+                android:backgroundTint="@color/importantpink"
+                android:text="Save" />
+        </TableRow>
+    </TableLayout>
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="0,1,2,3,4,5,6,7"
+        android:layout_margin="5dp"
+        android:gravity="top">
+        <TableRow
+            android:gravity="center">
+            <!-- Warning message -->
+            <TextView
+                android:id="@+id/namewarning"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                style="@style/warningText"
+                android:text=""/>
+        </TableRow>
+        <TableRow
+            android:layout_margin="10dp">
+            <!-- Profile picture -->
+            <ImageView
+                android:id="@+id/profilePic"
+                android:src="@drawable/defaultprofpic" />
+            <!-- Input name -->
+            <EditText
+                android:id="@+id/inputName"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:padding="5dp"
+                android:layout_span="6"
+                android:layout_gravity="top"
+                android:background="@color/white"
+                android:inputType="text"
+                android:hint="name"/>
+        </TableRow>
+    </TableLayout>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_weight="20"
+        android:gravity="top"
+        android:stretchColumns="0,1">
+        <TableRow>
+            <!-- Change picture button -->
+            <Button
+                android:id="@+id/changePicButton"
+                android:backgroundTint="@color/lightpink"
+                android:gravity="center_horizontal|center_vertical"
+                style="@style/basicButtonNarrow"
+                android:onClick="takePhotoClicked"
+                android:text="Take photo" />
+            <!-- Use default button -->
+            <Button
+                android:id="@+id/useDefault"
+                android:backgroundTint="@color/lightpink"
+                android:gravity="center_horizontal|center_vertical"
+                style="@style/basicButtonNarrow"
+                android:onClick="useDefaultPressed"
+                android:text="Use default" />
+        </TableRow>
+    </TableLayout>
+</LinearLayout>
+
