@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Help"
-    android:background="@drawable/background">
+    tools:context=".HelpOneMinute"
+    android:background="@drawable/backgroundonemin">
 
-    <!-- Help screen -->
+    <!-- Help screen for One Minute mode -->
 
     <TableLayout
         android:layout_width="match_parent"

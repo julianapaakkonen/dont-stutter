@@ -7,14 +7,15 @@ import android.view.View
 
 /**
  * @author Juliana Pääkkönen
- * @version 2021.0520
+ * @version 2021.0823
  * @since 1.4.31
  */
 
 /**
- * Activity where the app starts (Main menu).
+ * Menu for One Minute mode.
  */
-class MainActivity : AppCompatActivity() {
+
+class MenuOneMinute : AppCompatActivity() {
 
     /**
      * Calls the super class and sets user interface layout.
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.menu_one_minute)
     }
 
     /**
@@ -34,39 +35,39 @@ class MainActivity : AppCompatActivity() {
      * @param[button] button that calls the function
      */
     fun playClicked(button: View) {
-        startActivity(Intent(this, Play::class.java))
+        startActivity(Intent(this, GameOneMinute::class.java))
     }
 
     /**
-     * Opens profile list.
+     * Opens highscore for One Minute mode.
      *
-     * Is called when "profiles" is pressed.
+     * Is called when "highscore" is pressed.
      *
      * @param[button] button that calls the function
      */
-    fun profilesClicked(button: View) {
-        startActivity((Intent(this, Profile::class.java)))
+    fun highscoreClicked(button: View) {
+        startActivity(Intent(this, HighscoreOneMinute::class.java))
     }
 
     /**
-     * Opens reset screen, where user can determine if they want to reset or not.
+     * Opens instructions for One Minute mode.
      *
-     * Called when "reset game" is pressed.
+     * Is called when "help" is pressed.
      *
      * @param[button] button that calls the function
      */
-    fun resetClicked(button: View) {
-        startActivity(Intent(this, Reset::class.java))
+    fun helpClicked(button: View) {
+        startActivity(Intent(this, HelpOneMinute::class.java))
     }
 
     /**
-     * Closes the app.
+     * Returns back to previous menu.
      *
-     * Called when "quit" is pressed.
+     * Is called when "back" is pressed.
      *
      * @param[button] button that calls the function
      */
-    fun quitClicked(button: View) {
-        finishAffinity()
+    fun backClicked(button: View) {
+        startActivity(Intent(this, MenuStart::class.java))
     }
 }

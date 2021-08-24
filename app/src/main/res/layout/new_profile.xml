@@ -10,7 +10,7 @@
     android:gravity="center"
     android:background="@drawable/backgroundmain">
 
-    <!-- New profile screen -->
+    <!-- New profile -->
 
     <TableLayout
         android:layout_width="match_parent"

@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity"
+    tools:context=".MenuMain"
     android:layout_gravity="center"
     android:gravity="center"
     android:background="@drawable/backgroundmain">
 
-    <!-- Main menu -->
+    <!-- Main menu (first menu) -->
 
     <TableLayout
         android:layout_width="wrap_content"
@@ -24,13 +24,13 @@
                 android:src="@drawable/logo" />
         </TableRow>
         <TableRow>
-            <!-- Play button -->
+            <!-- Start button -->
             <Button
-                android:id="@+id/playButton"
-                android:onClick="playClicked"
+                android:id="@+id/startButton"
+                android:onClick="startClicked"
                 android:backgroundTint="@color/importantpink"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="Play" />
+                android:text="Start" />
         </TableRow>
         <TableRow>
             <!-- Profiles button -->

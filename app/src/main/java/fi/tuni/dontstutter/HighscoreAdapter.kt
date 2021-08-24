@@ -1,8 +1,10 @@
 package fi.tuni.dontstutter
 
+import HighscoreProfile
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -73,8 +75,8 @@ class HighscoreAdapter(var context: Context, var list: ArrayList<HighscoreProfil
         val info = view.findViewById(R.id.listitem) as TextView
         info.text = highscore.toString()
 
-        if(highscore.imgPath!! == "2131165289") {
-            bitmap = BitmapFactory.decodeResource(context.resources, highscore.imgPath!!.toInt())
+        if(highscore.imgPath == R.drawable.defaultprofpic.toString()) {
+            bitmap = BitmapFactory.decodeResource(context.resources, highscore.imgPath.toInt())
             bitmap = Bitmap.createScaledBitmap(bitmap, 200, 200, false)
         } else {
             setPic(highscore.imgPath) {

@@ -7,14 +7,14 @@ import android.view.View
 
 /**
  * @author Juliana Pääkkönen
- * @version 2021.0520
+ * @version 2021.0823
  * @since 1.4.31
  */
 
 /**
- * Activity to start playing, view highscores or view instructions.
+ * Activity to choose game mode.
  */
-class Play : AppCompatActivity() {
+class MenuStart : AppCompatActivity() {
 
     /**
      * Calls the super class and sets user interface layout.
@@ -23,40 +23,29 @@ class Play : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.play)
+        setContentView(R.layout.menu_start)
     }
 
     /**
-     * Starts the game.
+     * Opens One Minute mode menu.
      *
      * Is called when "one minute mode" is pressed.
      *
      * @param[button] button that calls the function
      */
-    fun playClicked(button: View) {
-        startActivity(Intent(this, OneMinuteGame::class.java))
+    fun playOneMinuteClicked(button: View) {
+        startActivity(Intent(this, MenuOneMinute::class.java))
     }
 
     /**
-     * Opens highscore screen.
+     * Opens Relax mode menu.
      *
-     * Called when "highscore" is pressed.
-     *
-     * @param[button] button that calls the function
-     */
-    fun highscoreClicked(button: View) {
-        startActivity(Intent(this, Highscore::class.java))
-    }
-
-    /**
-     * Opens help page.
-     *
-     * Is called when "help" is pressed.
+     * Is called when "relax mode" is pressed.
      *
      * @param[button] button that calls the function
      */
-    fun helpClicked(button: View) {
-        startActivity(Intent(this, Help::class.java))
+    fun playRelaxModeClicked(button: View) {
+        startActivity(Intent(this, MenuRelax::class.java))
     }
 
     /**
@@ -67,6 +56,6 @@ class Play : AppCompatActivity() {
      * @param[button] button that calls the function
      */
     fun backClicked(button: View) {
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, MenuMain::class.java))
     }
 }

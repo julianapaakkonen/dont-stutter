@@ -7,14 +7,14 @@ import androidx.appcompat.app.AppCompatActivity
 
 /**
  * @author Juliana Pääkkönen
- * @version 2021.0520
+ * @version 2021.0823
  * @since 1.4.31
  */
 
 /**
- * Activity to display instructions.
+ * Activity to display instructions for Relax mode.
  */
-class Help : AppCompatActivity() {
+class HelpRelax : AppCompatActivity() {
 
     /**
      * Calls the super class and sets user interface layout.
@@ -23,17 +23,17 @@ class Help : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.help_page)
+        setContentView(R.layout.help_relax)
     }
 
     /**
-     * Returns back to main menu.
+     * Returns back to previous menu.
      *
      * Called when "back" is pressed.
      *
      * @param[button] button that calls the function
      */
     fun backClicked(button: View) {
-        startActivity(Intent(this, Play::class.java))
+        startActivity(Intent(this, MenuRelax::class.java))
     }
 }

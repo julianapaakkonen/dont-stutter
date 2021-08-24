@@ -1,5 +1,6 @@
 package fi.tuni.dontstutter
 
+import HighscoreProfile
 import android.app.Activity
 import android.content.Context
 import com.fasterxml.jackson.core.type.TypeReference

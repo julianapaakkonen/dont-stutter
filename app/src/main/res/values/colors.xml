@@ -12,5 +12,6 @@
     <color name="importantpink">#e746e5</color>
     <color name="basicgray">#afafaf</color>
     <color name="lightblue">#7fd4d9</color>
+    <color name="lightgreen">#9fd97f</color>
     <color name="warningred">#c20000</color>
 </resources>

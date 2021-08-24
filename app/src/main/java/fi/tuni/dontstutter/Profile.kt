@@ -84,6 +84,6 @@ class Profile : AppCompatActivity() {
      * @param[button] button that calls the function
      */
     fun backClicked(button: View) {
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, MenuMain::class.java))
     }
 }

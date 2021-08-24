@@ -1,5 +1,6 @@
 package fi.tuni.dontstutter
 
+import HighscoreProfile
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,12 +14,12 @@ import android.widget.ListView
  */
 
 /**
- * Activity that displays current top 5 scores.
+ * Activity that displays current top 5 scores for One Minute mode.
  *
  * @property[highscoreView] ListView to display highscore
  * @property[adapter] custom adapter for ListView
  */
-class Highscore : AppCompatActivity() {
+class HighscoreOneMinute : AppCompatActivity() {
     lateinit var highscoreView: ListView
     lateinit var adapter: HighscoreAdapter
 
@@ -29,9 +30,9 @@ class Highscore : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.highscore)
+        setContentView(R.layout.highscore_one_minute)
         this.highscoreView = findViewById(R.id.listView)
-        this.loadHighscore("highscore", ::displayHighscore)
+        this.loadHighscore("highscoreOne", ::displayHighscore)
     }
 
     /**
@@ -53,6 +54,6 @@ class Highscore : AppCompatActivity() {
      * @param[button] button that calls the function
      */
     fun backClicked(button: View) {
-        startActivity(Intent(this, Play::class.java))
+        startActivity(Intent(this, MenuOneMinute::class.java))
     }
 }

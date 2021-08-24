@@ -15,7 +15,7 @@
         android:roundIcon="@mipmap/icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.DontStutter">
-        <activity android:name=".MainActivity"
+        <activity android:name=".MenuMain"
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,13 +23,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".OneMinuteGame"
+        <activity android:name=".GameOneMinute"
             android:screenOrientation="portrait" />
-        <activity android:name=".Help"
+        <activity android:name=".GameRelax"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".HelpOneMinute"
             android:screenOrientation="portrait" />
-        <activity android:name=".GameOver"
+        <activity android:name=".HelpRelax"
             android:screenOrientation="portrait" />
-        <activity android:name=".Highscore"
+        <activity android:name=".GameOverOneMinute"
+            android:screenOrientation="portrait" />
+        <activity android:name=".GameOverRelaxMode"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".HighscoreOneMinute"
+            android:screenOrientation="portrait" />
+        <activity android:name=".HighscoreRelax"
             android:screenOrientation="portrait" />
         <activity android:name=".Profile"
             android:screenOrientation="portrait" />
@@ -37,7 +45,11 @@
             android:screenOrientation="portrait" />
         <activity android:name=".NewProfile"
             android:screenOrientation="portrait"/>
-        <activity android:name=".Play"
+        <activity android:name=".MenuStart"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MenuRelax"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".MenuOneMinute"
             android:screenOrientation="portrait"/>
 
         <provider

@@ -35,7 +35,8 @@ class Reset : AppCompatActivity() {
      * @param[button] button that calls the function
      */
     fun yesClicked(button: View) {
-        this.resetPrefs("highscore")
+        this.resetPrefs("highscoreOne")
+        this.resetPrefs("highscoreRelax")
         this.resetPrefs("profile")
         this.resetPrefs("currprof")
         Toast.makeText(this, "Game reset", Toast.LENGTH_LONG).show()
@@ -49,7 +50,7 @@ class Reset : AppCompatActivity() {
      * @param[button] button that calls the function
      */
     fun noClicked(button: View) {
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, MenuMain::class.java))
     }
 
     /**
@@ -60,6 +61,6 @@ class Reset : AppCompatActivity() {
      * @param[button] button that calls the function
      */
     fun backClicked(button: View) {
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, MenuMain::class.java))
     }
 }

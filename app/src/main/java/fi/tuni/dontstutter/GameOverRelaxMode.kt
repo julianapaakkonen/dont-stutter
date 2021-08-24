@@ -1,40 +1,32 @@
 package fi.tuni.dontstutter
 
+import HighscoreProfile
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import java.util.*
 
 /**
  * @author Juliana Pääkkönen
- * @version 2021.0520
+ * @version 2021.0823
  * @since 1.4.31
  */
 
 /**
- * Activity displayed when the game is over.
+ * Activity displayed when game is over (Relax mode).
  *
- * @property[liveScoreView] View to display how many lives were left
  * @property[wordScoreView] View to display how many words were found
- * @property[finalScoreView] View to display final score
+ * @property[finalScore] final score
  * @property[newHighView] View to display current highscore or if new highscore was achieved
- * @property[liveScore] how many lives were left
- * @property[wordScore] how many words were found
- * @property[finalScore] final score (lives + words)
  * @property[currProfInd] index of currently active profile
- * @propery[currentProfile] currently active profile
+ * @property[currentProfile] currently active profile
  * @property[newHighscore] highscore to be saved
  */
-class GameOver : AppCompatActivity() {
-    lateinit var liveScoreView: TextView
+class GameOverRelaxMode : AppCompatActivity() {
     lateinit var wordScoreView: TextView
-    lateinit var finalScoreView: TextView
-    lateinit var newHighView: TextView
-    var liveScore = 0
-    var wordScore = 0
     var finalScore = 0
+    lateinit var newHighView: TextView
     var currProfInd = 0
     lateinit var currentProfile: PlayerProfile
     lateinit var newHighscore: HighscoreProfile
@@ -46,10 +38,8 @@ class GameOver : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.game_over)
+        setContentView(R.layout.game_over_relax)
         this.wordScoreView = findViewById(R.id.wordscore)
-        this.liveScoreView = findViewById(R.id.livescore)
-        this.finalScoreView = findViewById(R.id.finalScore)
         this.newHighView = findViewById(R.id.newhigh)
         loadCurrentProf("currprof") {
             this.currProfInd = it
@@ -69,13 +59,9 @@ class GameOver : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         if(intent.extras != null) {
-            this.wordScore = intent.extras!!.getInt("wordScore")
-            this.liveScore = intent.extras!!.getInt("liveScore")
-            this.finalScore = wordScore + liveScore
-            this.wordScoreView.text = "You found " + wordScore + " WORDS"
-            this.liveScoreView.text = "You have " + liveScore + " HEARTS left"
-            this.finalScoreView.text = "FINAL SCORE " + finalScore
-            this.loadHighscore("highscore", ::compareHighscore)
+            this.finalScore = intent.extras!!.getInt("wordScore")
+            this.wordScoreView.text = "Your score: " + finalScore
+            this.loadHighscore("highscoreRelax", ::compareHighscore)
         }
     }
 
@@ -107,14 +93,14 @@ class GameOver : AppCompatActivity() {
             if(newHigh) {
                 newHighscore = HighscoreProfile(finalScore, currentProfile.name, currentProfile.img)
                 newHighscore.setDate()
-                this.saveHighscore("highscore", newHighscore)
+                this.saveHighscore("highscoreRelax", newHighscore)
             }
         } else {
             if (finalScore > 0) {
                 this.newHighView.text = "NEW HIGHSCORE!"
                 newHighscore = HighscoreProfile(finalScore, currentProfile.name, currentProfile.img)
                 newHighscore.setDate()
-                this.saveHighscore("highscore", newHighscore)
+                this.saveHighscore("highscoreRelax", newHighscore)
             } else {
                 this.newHighView.text = "Try again"
             }
@@ -129,7 +115,7 @@ class GameOver : AppCompatActivity() {
      * @param[button] button that calls the function
      */
     fun againClicked(button: View) {
-        startActivity(Intent(this, OneMinuteGame::class.java))
+        startActivity(Intent(this, GameRelax::class.java))
     }
 
     /**
@@ -140,38 +126,7 @@ class GameOver : AppCompatActivity() {
      * @param[button] button that calls the function
      */
     fun mainClicked(button: View) {
-        startActivity(Intent(this, Play::class.java))
+        startActivity(Intent(this, MenuRelax::class.java))
     }
 }
 
-/**
- * Creates objects for highscore.
- *
- * @property[score] highscore
- * @property[name] player's name
- * @property[imgPath] player's profile picture
- * @property[date] current date
- */
-data class HighscoreProfile(val score: Int = 0, val name: String  = "anonymous",
-                            val imgPath: String? = R.drawable.defaultprofpic.toString(),
-                            var date: String = "00-00-0000") {
-
-    /**
-     * Sets date for highscore.
-     */
-    fun setDate() {
-        val year = Calendar.getInstance().get(Calendar.YEAR)
-        val month = Calendar.getInstance().get(Calendar.MONTH) + 1
-        val day = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
-        this.date = "$day.$month.$year"
-    }
-
-    /**
-     * Formats score, name and date.
-     *
-     * @return formatted String containing score, name and date
-     */
-    override fun toString(): String {
-        return "%-4s\t%-10s\t%10s".format("$score", "$name", "$date")
-    }
-}

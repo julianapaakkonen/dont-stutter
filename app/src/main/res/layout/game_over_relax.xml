@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".GameOver"
+    tools:context=".GameOverRelaxMode"
     android:layout_gravity="center"
     android:gravity="center"
-    android:background="@drawable/background">
+    android:background="@drawable/backgroundrelax">
 
-    <!-- Game over screen -->
+    <!-- Game over screen for Relax mode -->
 
     <TableLayout
         android:layout_width="wrap_content"
@@ -20,7 +20,7 @@
             <!-- Logo -->
             <ImageView
                 android:id="@+id/logo"
-                android:src="@drawable/logo"
+                android:src="@drawable/logorelax"
                 android:layout_marginBottom="5dp"/>
         </TableRow>
         <TableRow
@@ -33,25 +33,9 @@
                 android:text=""/>
         </TableRow>
         <TableRow>
-            <!-- How many words were found -->
+            <!-- Score -->
             <TextView
                 android:id="@+id/wordscore"
-                android:gravity="center_horizontal|center_vertical"
-                style="@style/basicText"
-                android:text=""/>
-        </TableRow>
-        <TableRow>
-            <!-- How many lives were left -->
-            <TextView
-                android:id="@+id/livescore"
-                android:gravity="center_horizontal|center_vertical"
-                style="@style/basicText"
-                android:text=""/>
-        </TableRow>
-        <TableRow>
-            <!-- Final score -->
-            <TextView
-                android:id="@+id/finalScore"
                 android:gravity="center_horizontal|center_vertical"
                 style="@style/basicText"
                 android:text=""/>

@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Play"
+    tools:context=".MenuStart"
     android:layout_gravity="center"
     android:gravity="center"
-    android:background="@drawable/background">
+    android:background="@drawable/backgroundmain">
 
-    <!-- Main menu -->
+    <!-- "Start" menu (second menu) -->
 
     <TableLayout
         android:layout_width="wrap_content"
@@ -24,31 +24,22 @@
                 android:src="@drawable/logo" />
         </TableRow>
         <TableRow>
-            <!-- Play button -->
+            <!-- (Play) One Minute mode button -->
             <Button
-                android:id="@+id/playButton"
-                android:onClick="playClicked"
+                android:id="@+id/playOneMinuteButton"
+                android:onClick="playOneMinuteClicked"
                 android:backgroundTint="@color/importantpink"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="One Minute Mode" />
         </TableRow>
         <TableRow>
-            <!-- Highscore button -->
+            <!-- (Play) Relax mode button -->
             <Button
-                android:id="@+id/highscoreButton"
-                android:onClick="highscoreClicked"
-                android:backgroundTint="@color/lightpink"
+                android:id="@+id/playRelaxModeButton"
+                android:onClick="playRelaxModeClicked"
+                android:backgroundTint="@color/importantpink"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="Highscore"/>
-        </TableRow>
-        <TableRow>
-            <!-- Help button -->
-            <Button
-                android:id="@+id/helpButton"
-                android:onClick="helpClicked"
-                android:backgroundTint="@color/lightpink"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="Help"/>
+                android:text="Relax Mode" />
         </TableRow>
         <TableRow>
             <!-- Back button -->
@@ -57,7 +48,7 @@
                 android:onClick="backClicked"
                 android:backgroundTint="@color/lightpink"
                 android:gravity="center_horizontal|center_vertical"
-                android:text="Main menu" />
+                android:text="Back" />
         </TableRow>
     </TableLayout>
 </LinearLayout>

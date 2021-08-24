@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".GameOverOneMinute"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:background="@drawable/backgroundonemin">
+
+    <!-- Game over screen for One Minute mode -->
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center">
+        <TableRow>
+            <!-- Logo -->
+            <ImageView
+                android:id="@+id/logo"
+                android:src="@drawable/logoonemin"
+                android:layout_marginBottom="5dp"/>
+        </TableRow>
+        <TableRow
+            android:layout_marginBottom="5dp">
+            <!-- Announces if new highscore was found or displays current highscore -->
+            <TextView
+                android:id="@+id/newhigh"
+                android:gravity="center_horizontal|center_vertical"
+                style="@style/basicText"
+                android:text=""/>
+        </TableRow>
+        <TableRow>
+            <!-- Score from words -->
+            <TextView
+                android:id="@+id/wordscore"
+                android:gravity="center_horizontal|center_vertical"
+                style="@style/basicText"
+                android:text=""/>
+        </TableRow>
+        <TableRow>
+            <!-- Extra score from remaining lives -->
+            <TextView
+                android:id="@+id/livescore"
+                android:gravity="center_horizontal|center_vertical"
+                style="@style/basicText"
+                android:text=""/>
+        </TableRow>
+        <TableRow>
+            <!-- Final score -->
+            <TextView
+                android:id="@+id/finalScore"
+                android:gravity="center_horizontal|center_vertical"
+                style="@style/basicText"
+                android:text=""/>
+        </TableRow>
+        <TableRow>
+            <!-- Play again button -->
+            <Button
+                android:id="@+id/playButton"
+                android:onClick="againClicked"
+                android:gravity="center_horizontal|center_vertical"
+                android:backgroundTint="@color/importantpink"
+                android:textColor="@color/white"
+                android:text="Play again"
+                />
+        </TableRow>
+        <TableRow>
+            <!-- Main menu button -->
+            <Button
+                android:id="@+id/mainButton"
+                android:onClick="mainClicked"
+                android:gravity="center_horizontal|center_vertical"
+                android:backgroundTint="@color/lightpink"
+                android:textColor="@color/white"
+                android:text="Menu"/>
+        </TableRow>
+    </TableLayout>
+</LinearLayout>
+

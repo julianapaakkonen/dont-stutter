@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".OneMinuteGame"
+    tools:context=".GameRelax"
     android:weightSum="100"
-    android:background="@drawable/background">
+    android:background="@drawable/backgroundrelax">
 
-    <!-- OneMinute game -->
+    <!-- Relax mode -->
 
     <TableLayout
         android:layout_width="match_parent"
@@ -25,35 +25,29 @@
                 style="@style/basicButtonNarrow"
                 android:backgroundTint="@color/lightpink"
                 android:text="Back" />
-            <!-- Skip button -->
+            <!-- Quit button -->
             <Button
-                android:id="@+id/skip"
+                android:id="@+id/quitButton"
                 style="@style/basicButtonNarrow"
                 android:backgroundTint="@color/lightpink"
-                android:onClick="skipClicked"
-                android:text="Skip" />
+                android:onClick="quitClicked"
+                android:text="Quit" />
         </TableRow>
     </TableLayout>
 
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:stretchColumns="0,1"
+        android:stretchColumns="0"
         android:gravity="top">
         <TableRow
             android:layout_weight="1">
-            <!-- Word count -->
+            <!-- Score -->
             <TextView
                 android:id="@+id/wordcount"
                 android:gravity="center_horizontal|center_vertical"
-                style="@style/basicText"
+                style="@style/gameText"
                 android:text="0"/>
-            <!-- Timer -->
-            <TextView
-                android:id="@+id/timer"
-                android:gravity="center_horizontal|center_vertical"
-                style="@style/basicText"
-                android:text="60"/>
         </TableRow>
     </TableLayout>
 
@@ -62,7 +56,7 @@
         android:layout_height="wrap_content"
         android:stretchColumns="0,1,2,3,4"
         android:layout_margin="30dp">
-        <!-- Empty spaces and letters -->
+        <!-- Empty spaces ("answer buttons") -->
         <TableRow
             android:weightSum="5"
             android:layout_weight="1">
@@ -70,34 +64,36 @@
                 android:id="@+id/L1"
                 android:layout_margin="2dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/lightblue"
+                android:backgroundTint="@color/lightgreen"
                 android:onClick="emptyClicked"
                 android:text="" />
             <Button
                 android:id="@+id/L2"
                 android:layout_margin="2dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/basicgray"
+                android:backgroundTint="@color/lightgreen"
+                android:onClick="emptyClicked"
                 android:text="" />
             <Button
                 android:id="@+id/L3"
                 android:layout_margin="2dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/lightblue"
+                android:backgroundTint="@color/lightgreen"
                 android:onClick="emptyClicked"
                 android:text="" />
             <Button
                 android:id="@+id/L4"
                 android:layout_margin="2dp"
                 android:layout_weight="1"
+                android:backgroundTint="@color/lightgreen"
                 android:onClick="emptyClicked"
-                android:backgroundTint="@color/lightblue"
                 android:text="" />
             <Button
                 android:id="@+id/L5"
                 android:layout_margin="2dp"
                 android:layout_weight="1"
-                android:backgroundTint="@color/basicgray"
+                android:backgroundTint="@color/lightgreen"
+                android:onClick="emptyClicked"
                 android:text="" />
         </TableRow>
     </TableLayout>
@@ -106,172 +102,106 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:stretchColumns="0,1,2,3,4,5,6"
+        android:stretchColumns="0,1,2,3,4"
         android:layout_margin="5dp"
         android:layout_gravity="bottom">
         <TableRow>
             <Button
-                android:id="@+id/a"
+                android:id="@+id/G1"
                 android:onClick="letterClicked"
                 style="@style/letterButton"
                 android:backgroundTint="@color/white"
-                android:text="A" />
+                android:text="" />
             <Button
-                android:id="@+id/b"
+                android:id="@+id/G2"
                 android:onClick="letterClicked"
                 style="@style/letterButton"
                 android:backgroundTint="@color/white"
-                android:text="B" />
+                android:text="" />
             <Button
-                android:id="@+id/c"
+                android:id="@+id/G3"
                 android:onClick="letterClicked"
                 style="@style/letterButton"
                 android:backgroundTint="@color/white"
-                android:text="C" />
+                android:text="" />
             <Button
-                android:id="@+id/d"
+                android:id="@+id/G4"
                 android:onClick="letterClicked"
                 style="@style/letterButton"
                 android:backgroundTint="@color/white"
-                android:text="D" />
+                android:text="" />
             <Button
-                android:id="@+id/e"
+                android:id="@+id/G5"
                 android:onClick="letterClicked"
                 style="@style/letterButton"
                 android:backgroundTint="@color/white"
-                android:text="E" />
-            <Button
-                android:id="@+id/f"
-                android:onClick="letterClicked"
-                style="@style/letterButton"
-                android:backgroundTint="@color/white"
-                android:text="F" />
-            <Button
-                android:id="@+id/g"
-                android:onClick="letterClicked"
-                style="@style/letterButton"
-                android:backgroundTint="@color/white"
-                android:text="G" />
+                android:text="" />
         </TableRow>
         <TableRow>
             <Button
-                android:id="@+id/h"
+                android:id="@+id/G6"
                 android:onClick="letterClicked"
                 style="@style/letterButton"
                 android:backgroundTint="@color/white"
-                android:text="H" />
+                android:text="" />
             <Button
-                android:id="@+id/i"
+                android:id="@+id/G7"
                 android:onClick="letterClicked"
                 style="@style/letterButton"
                 android:backgroundTint="@color/white"
-                android:text="I" />
+                android:text="" />
             <Button
-                android:id="@+id/j"
+                android:id="@+id/G8"
                 android:onClick="letterClicked"
                 style="@style/letterButton"
                 android:backgroundTint="@color/white"
-                android:text="J" />
+                android:text="" />
             <Button
-                android:id="@+id/k"
+                android:id="@+id/G9"
                 android:onClick="letterClicked"
                 style="@style/letterButton"
                 android:backgroundTint="@color/white"
-                android:text="K" />
+                android:text="" />
             <Button
-                android:id="@+id/l"
+                android:id="@+id/G10"
                 android:onClick="letterClicked"
                 style="@style/letterButton"
                 android:backgroundTint="@color/white"
-                android:text="L" />
-            <Button
-                android:id="@+id/m"
-                android:onClick="letterClicked"
-                style="@style/letterButton"
-                android:backgroundTint="@color/white"
-                android:text="M" />
-            <Button
-                android:id="@+id/n"
-                android:onClick="letterClicked"
-                style="@style/letterButton"
-                android:backgroundTint="@color/white"
-                android:text="N" />
+                android:text="" />
         </TableRow>
         <TableRow>
             <Button
-                android:id="@+id/o"
+                android:id="@+id/G11"
                 android:onClick="letterClicked"
                 style="@style/letterButton"
                 android:backgroundTint="@color/white"
-                android:text="O" />
+                android:text="" />
             <Button
-                android:id="@+id/p"
+                android:id="@+id/G12"
                 android:onClick="letterClicked"
                 style="@style/letterButton"
                 android:backgroundTint="@color/white"
-                android:text="P" />
+                android:text="" />
             <Button
-                android:id="@+id/q"
+                android:id="@+id/G13"
                 android:onClick="letterClicked"
                 style="@style/letterButton"
                 android:backgroundTint="@color/white"
-                android:text="Q" />
+                android:text="" />
             <Button
-                android:id="@+id/r"
+                android:id="@+id/G14"
                 android:onClick="letterClicked"
                 style="@style/letterButton"
                 android:backgroundTint="@color/white"
-                android:text="R" />
+                android:text="" />
             <Button
-                android:id="@+id/s"
+                android:id="@+id/G15"
                 android:onClick="letterClicked"
                 style="@style/letterButton"
                 android:backgroundTint="@color/white"
-                android:text="S" />
-            <Button
-                android:id="@+id/t"
-                android:onClick="letterClicked"
-                style="@style/letterButton"
-                android:backgroundTint="@color/white"
-                android:text="T" />
-            <Button
-                android:id="@+id/u"
-                android:onClick="letterClicked"
-                style="@style/letterButton"
-                android:backgroundTint="@color/white"
-                android:text="U" />
+                android:text="" />
         </TableRow>
         <TableRow>
-            <Button
-                android:id="@+id/v"
-                android:onClick="letterClicked"
-                style="@style/letterButton"
-                android:backgroundTint="@color/white"
-                android:text="V" />
-            <Button
-                android:id="@+id/w"
-                android:onClick="letterClicked"
-                style="@style/letterButton"
-                android:backgroundTint="@color/white"
-                android:text="W" />
-            <Button
-                android:id="@+id/x"
-                android:onClick="letterClicked"
-                style="@style/letterButton"
-                android:backgroundTint="@color/white"
-                android:text="X" />
-            <Button
-                android:id="@+id/y"
-                android:onClick="letterClicked"
-                style="@style/letterButton"
-                android:backgroundTint="@color/white"
-                android:text="Y" />
-            <Button
-                android:id="@+id/z"
-                android:onClick="letterClicked"
-                style="@style/letterButton"
-                android:backgroundTint="@color/white"
-                android:text="Z" />
             <!-- Guess button -->
             <Button
                 android:id="@+id/submit"

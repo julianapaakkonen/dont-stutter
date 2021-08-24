@@ -73,7 +73,7 @@ class ProfileAdapter(var context: Context, var list: ArrayList<PlayerProfile>): 
         val name = view.findViewById(R.id.listitem) as TextView
         name.text = profile.toString()
 
-        if(profile.img!! == "2131165289") {
+        if(profile.img!! == R.drawable.defaultprofpic.toString()) {
             bitmap = BitmapFactory.decodeResource(context.resources, profile.img!!.toInt())
             bitmap = Bitmap.createScaledBitmap(bitmap, 200, 200, false)
         } else {
