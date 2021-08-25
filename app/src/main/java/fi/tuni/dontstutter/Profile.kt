@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 /**
  * @author Juliana Pääkkönen
- * @version 2021.0520
+ * @version 2021.0825
  * @since 1.4.31
  */
 
@@ -23,11 +23,11 @@ import androidx.appcompat.app.AppCompatActivity
  * @property[arraylist] list of profiles
  */
 class Profile : AppCompatActivity() {
-    lateinit var profileView: ListView
-    lateinit var adapter: ProfileAdapter
-    lateinit var activeprof: TextView
-    var currentProf = 0
-    lateinit var arraylist: ArrayList<PlayerProfile>
+    private lateinit var profileView: ListView
+    private lateinit var adapter: ProfileAdapter
+    private lateinit var activeprof: TextView
+    private var currentProf = 0
+    private lateinit var arraylist: ArrayList<PlayerProfile>
 
     /**
      * Calls the super class and sets user interface layout.
@@ -43,7 +43,7 @@ class Profile : AppCompatActivity() {
         this.loadProfile("profile") {
             arraylist = ArrayList(it)
         }
-        this.loadCurrentProf("currprof") {
+        this.loadCurrentProf("currprof") { it ->
             currentProf = it
             this.loadProfile("profile") {
                 if(it.isNotEmpty()) {

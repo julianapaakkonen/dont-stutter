@@ -20,7 +20,7 @@ import java.util.*
 
 /**
  * @author Juliana Pääkkönen
- * @version 2021.0520
+ * @version 2021.0825
  * @since 1.4.31
  */
 
@@ -35,18 +35,18 @@ import java.util.*
  * @property[imgPath] profile picture (path)
  * @property[newProfile] new profile to be saved
  * @property[currImgPath] path where photo (from camera) is saved
- * @property[REQUEST_IMAGE_CAPTURE] request code
+ * @property[requestImageCapture] request code
  */
 class NewProfile : AppCompatActivity() {
-    lateinit var inputName: EditText
+    private lateinit var inputName: EditText
     lateinit var imageView: ImageView
-    lateinit var warning: TextView
+    private lateinit var warning: TextView
     var name = "anonymous"
-    val defaultImg = R.drawable.defaultprofpic.toString()
-    var imgPath: String? = R.drawable.defaultprofpic.toString()
-    lateinit var newProfile: PlayerProfile
-    var currImgPath: String? = ""
-    val REQUEST_IMAGE_CAPTURE = 1
+    private val defaultImg = R.drawable.defaultprofpic.toString()
+    private var imgPath: String? = R.drawable.defaultprofpic.toString()
+    private lateinit var newProfile: PlayerProfile
+    private var currImgPath: String? = ""
+    private val requestImageCapture = 1
 
     /**
      * Calls the super class and sets user interface layout.
@@ -141,9 +141,9 @@ class NewProfile : AppCompatActivity() {
     /**
      * Resets back to default picture.
      */
-    fun resetPic() {
+    private fun resetPic() {
         imgPath = defaultImg
-        var bm = BitmapFactory.decodeResource(this.resources, defaultImg.toInt())
+        val bm = BitmapFactory.decodeResource(this.resources, defaultImg.toInt())
         this.imageView.setImageBitmap(bm)
     }
 
@@ -163,7 +163,7 @@ class NewProfile : AppCompatActivity() {
      *
      * @return path where photo should be saved
      */
-    fun createFile(): File {
+    private fun createFile(): File {
         val timeStamp: String = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val file: File? = getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         return File.createTempFile("JPEG_${timeStamp}_", ".jpg", file).apply {
@@ -174,7 +174,7 @@ class NewProfile : AppCompatActivity() {
     /**
      * Calls createFile to get file for saving photo and opens camera.
      */
-    fun takePhoto() {
+    private fun takePhoto() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { intent ->
             intent.resolveActivity(packageManager)?.also {
                 val imgFile: File? = try {
@@ -189,7 +189,7 @@ class NewProfile : AppCompatActivity() {
                         val uri: Uri = FileProvider.getUriForFile(this,
                                                         "fi.tuni.dontstutter", it)
                         intent.putExtra(MediaStore.EXTRA_OUTPUT, uri)
-                        startActivityForResult(intent, REQUEST_IMAGE_CAPTURE)
+                        startActivityForResult(intent, requestImageCapture)
                     }
                 } catch (e: Exception) {
                     Toast.makeText(this, "Unable to use camera",
@@ -210,7 +210,7 @@ class NewProfile : AppCompatActivity() {
      */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+        if (requestCode == requestImageCapture && resultCode == RESULT_OK) {
             imgPath = currImgPath
             setPic(imgPath) {
                 imageView.setImageBitmap(it)

@@ -1,6 +1,5 @@
 package fi.tuni.dontstutter
 
-import HighscoreProfile
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -9,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 /**
  * @author Juliana Pääkkönen
- * @version 2021.0823
+ * @version 2021.0825
  * @since 1.4.31
  */
 
@@ -24,12 +23,12 @@ import androidx.appcompat.app.AppCompatActivity
  * @property[newHighscore] highscore to be saved
  */
 class GameOverRelaxMode : AppCompatActivity() {
-    lateinit var wordScoreView: TextView
-    var finalScore = 0
-    lateinit var newHighView: TextView
-    var currProfInd = 0
-    lateinit var currentProfile: PlayerProfile
-    lateinit var newHighscore: HighscoreProfile
+    private lateinit var wordScoreView: TextView
+    private var finalScore = 0
+    private lateinit var newHighView: TextView
+    private var currProfInd = 0
+    private lateinit var currentProfile: PlayerProfile
+    private lateinit var newHighscore: HighscoreProfile
 
     /**
      * Calls the super class and sets user interface layout.
@@ -70,10 +69,10 @@ class GameOverRelaxMode : AppCompatActivity() {
      *
      * @param[prevHighscore] current highscore, loaded from preferences
      */
-    fun compareHighscore(prevHighscore: MutableList<HighscoreProfile>) {
+    private fun compareHighscore(prevHighscore: MutableList<HighscoreProfile>) {
         var newHigh =  false
         if(!prevHighscore.isNullOrEmpty()) {
-            var currentHigh = prevHighscore[0].score
+            val currentHigh = prevHighscore[0].score
             if(currentHigh < finalScore) {
                 this.newHighView.text = "NEW HIGHSCORE!"
             } else {

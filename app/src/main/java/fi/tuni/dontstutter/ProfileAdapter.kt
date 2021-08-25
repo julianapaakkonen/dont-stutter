@@ -12,7 +12,7 @@ import android.widget.TextView
 
 /**
  * @author Juliana Pääkkönen
- * @version 2021.0520
+ * @version 2021.0825
  * @since 1.4.31
  */
 
@@ -74,7 +74,7 @@ class ProfileAdapter(var context: Context, var list: ArrayList<PlayerProfile>): 
         name.text = profile.toString()
 
         if(profile.img!! == R.drawable.defaultprofpic.toString()) {
-            bitmap = BitmapFactory.decodeResource(context.resources, profile.img!!.toInt())
+            bitmap = BitmapFactory.decodeResource(context.resources, profile.img.toInt())
             bitmap = Bitmap.createScaledBitmap(bitmap, 200, 200, false)
         } else {
             setPic(profile.img) {

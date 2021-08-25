@@ -1,6 +1,5 @@
 package fi.tuni.dontstutter
 
-import HighscoreProfile
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -9,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 /**
  * @author Juliana Pääkkönen
- * @version 2021.0823
+ * @version 2021.0825
  * @since 1.4.31
  */
 
@@ -29,17 +28,17 @@ import androidx.appcompat.app.AppCompatActivity
  * @property[newHighscore] highscore to be saved
  */
 class GameOverOneMinute : AppCompatActivity() {
-    lateinit var liveScoreView: TextView
-    lateinit var wordScoreView: TextView
-    lateinit var finalScoreView: TextView
-    lateinit var newHighView: TextView
-    var liveScore = 0
-    var wordScore = 0
-    var finalScore = 0
-    var currProfInd = 0
-    var finalLiveScore = 0
-    lateinit var currentProfile: PlayerProfile
-    lateinit var newHighscore: HighscoreProfile
+    private lateinit var liveScoreView: TextView
+    private lateinit var wordScoreView: TextView
+    private lateinit var finalScoreView: TextView
+    private lateinit var newHighView: TextView
+    private var liveScore = 0
+    private var wordScore = 0
+    private var finalScore = 0
+    private var currProfInd = 0
+    private var finalLiveScore = 0
+    private lateinit var currentProfile: PlayerProfile
+    private lateinit var newHighscore: HighscoreProfile
 
     /**
      * Calls the super class and sets user interface layout.
@@ -87,7 +86,7 @@ class GameOverOneMinute : AppCompatActivity() {
      *
      * @param[livesLeft] lives left at the end of the game
      */
-    fun countLiveScore(livesLeft: Int) {
+    private fun countLiveScore(livesLeft: Int) {
         when(livesLeft) {
             0 -> finalLiveScore += 0
             1 -> finalLiveScore += 10
@@ -101,7 +100,7 @@ class GameOverOneMinute : AppCompatActivity() {
      *
      * @param[prevHighscore] current highscore, loaded from preferences
      */
-    fun compareHighscore(prevHighscore: MutableList<HighscoreProfile>) {
+    private fun compareHighscore(prevHighscore: MutableList<HighscoreProfile>) {
         var newHigh =  false
         if(!prevHighscore.isNullOrEmpty()) {
             var currentHigh = prevHighscore[0].score

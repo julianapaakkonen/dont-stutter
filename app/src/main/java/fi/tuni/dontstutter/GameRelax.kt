@@ -12,7 +12,7 @@ import kotlin.random.Random
 
 /**
  * @author Juliana Pääkkönen
- * @version 2021.0809
+ * @version 2021.0825
  * @since 1.4.31
  */
 
@@ -57,41 +57,41 @@ import kotlin.random.Random
  */
 
 class GameRelax : AppCompatActivity() {
-    lateinit var l1: Button
-    lateinit var l2: Button
-    lateinit var l3: Button
-    lateinit var l4: Button
-    lateinit var l5: Button
-    lateinit var g1: Button
-    lateinit var g2: Button
-    lateinit var g3: Button
-    lateinit var g4: Button
-    lateinit var g5: Button
-    lateinit var g6: Button
-    lateinit var g7: Button
-    lateinit var g8: Button
-    lateinit var g9: Button
-    lateinit var g10: Button
-    lateinit var g11: Button
-    lateinit var g12: Button
-    lateinit var g13: Button
-    lateinit var g14: Button
-    lateinit var g15: Button
-    lateinit var submit: Button
-    lateinit var h1: ImageView
-    lateinit var h2: ImageView
-    lateinit var h3: ImageView
-    lateinit var wordCountView: TextView
-    var wordCount = 0
-    val wordManager = WordManager()
-    var answerString = ""
-    var hearts = 3
-    var lettersReady = false
-    var useLetters = false
-    var letterList = mutableListOf<Char>()
-    var letterButtonList = mutableListOf<Button>()
-    var answerButtonList = mutableListOf<Button>()
-    var guessedWords = mutableListOf<String>()
+    private lateinit var l1: Button
+    private lateinit var l2: Button
+    private lateinit var l3: Button
+    private lateinit var l4: Button
+    private lateinit var l5: Button
+    private lateinit var g1: Button
+    private lateinit var g2: Button
+    private lateinit var g3: Button
+    private lateinit var g4: Button
+    private lateinit var g5: Button
+    private lateinit var g6: Button
+    private lateinit var g7: Button
+    private lateinit var g8: Button
+    private lateinit var g9: Button
+    private lateinit var g10: Button
+    private lateinit var g11: Button
+    private lateinit var g12: Button
+    private lateinit var g13: Button
+    private lateinit var g14: Button
+    private lateinit var g15: Button
+    private lateinit var submit: Button
+    private lateinit var h1: ImageView
+    private lateinit var h2: ImageView
+    private lateinit var h3: ImageView
+    private lateinit var wordCountView: TextView
+    private var wordCount = 0
+    private val wordManager = WordManager()
+    private var answerString = ""
+    private var hearts = 3
+    private var lettersReady = false
+    private var useLetters = false
+    private var letterList = mutableListOf<Char>()
+    private var letterButtonList = mutableListOf<Button>()
+    private var answerButtonList = mutableListOf<Button>()
+    private var guessedWords = mutableListOf<String>()
 
     /**
      * Calls the super class and sets user interface layout.
@@ -101,31 +101,31 @@ class GameRelax : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.game_relax)
-        this.l1 = findViewById(R.id.L1)
-        this.l2 = findViewById(R.id.L2)
-        this.l3 = findViewById(R.id.L3)
-        this.l4 = findViewById(R.id.L4)
-        this.l5 = findViewById(R.id.L5)
-        this.g1 = findViewById(R.id.G1)
-        this.g2 = findViewById(R.id.G2)
-        this.g3 = findViewById(R.id.G3)
-        this.g4 = findViewById(R.id.G4)
-        this.g5 = findViewById(R.id.G5)
-        this.g6 = findViewById(R.id.G6)
-        this.g7 = findViewById(R.id.G7)
-        this.g8 = findViewById(R.id.G8)
-        this.g9 = findViewById(R.id.G9)
-        this.g10 = findViewById(R.id.G10)
-        this.g11 = findViewById(R.id.G11)
-        this.g12 = findViewById(R.id.G12)
-        this.g13 = findViewById(R.id.G13)
-        this.g14 = findViewById(R.id.G14)
-        this.g15 = findViewById(R.id.G15)
-        this.submit = findViewById(R.id.submit)
-        this.h1 = findViewById(R.id.h1)
-        this.h2 = findViewById(R.id.h2)
-        this.h3 = findViewById(R.id.h3)
-        this.wordCountView = findViewById(R.id.wordcount)
+        l1 = findViewById(R.id.L1)
+        l2 = findViewById(R.id.L2)
+        l3 = findViewById(R.id.L3)
+        l4 = findViewById(R.id.L4)
+        l5 = findViewById(R.id.L5)
+        g1 = findViewById(R.id.G1)
+        g2 = findViewById(R.id.G2)
+        g3 = findViewById(R.id.G3)
+        g4 = findViewById(R.id.G4)
+        g5 = findViewById(R.id.G5)
+        g6 = findViewById(R.id.G6)
+        g7 = findViewById(R.id.G7)
+        g8 = findViewById(R.id.G8)
+        g9 = findViewById(R.id.G9)
+        g10 = findViewById(R.id.G10)
+        g11 = findViewById(R.id.G11)
+        g12 = findViewById(R.id.G12)
+        g13 = findViewById(R.id.G13)
+        g14 = findViewById(R.id.G14)
+        g15 = findViewById(R.id.G15)
+        submit = findViewById(R.id.submit)
+        h1 = findViewById(R.id.h1)
+        h2 = findViewById(R.id.h2)
+        h3 = findViewById(R.id.h3)
+        wordCountView = findViewById(R.id.wordcount)
         letterButtonList.add(g1)
         letterButtonList.add(g2)
         letterButtonList.add(g3)
@@ -159,7 +159,7 @@ class GameRelax : AppCompatActivity() {
      * When the letters have been created, guess button can be pressed.
      *
      */
-    fun startGame() {
+    private fun startGame() {
         lettersReady = true
         useLetters = true
     }
@@ -167,12 +167,12 @@ class GameRelax : AppCompatActivity() {
     /**
      * Builds a string with one randomized vowel and four question marks and calls createList.
      */
-    fun createLetters() {
+    private fun createLetters() {
         var searchWordString = "?????"
-        var randVow = getRandomVowel()
-        var randInd = Random.nextInt(0, searchWordString.length)
-        var partOne = searchWordString.subSequence(0, randInd)
-        var partTwo = searchWordString.subSequence(randInd+1, searchWordString.length)
+        val randVow = getRandomVowel()
+        val randInd = Random.nextInt(0, searchWordString.length)
+        val partOne = searchWordString.subSequence(0, randInd)
+        val partTwo = searchWordString.subSequence(randInd+1, searchWordString.length)
         searchWordString = partOne.toString() + randVow + partTwo
         wordManager.createList("https://api.datamuse.com/words?sp=" +
                     searchWordString + "&md=f&max=" + 100, ::showLetters)
@@ -182,14 +182,15 @@ class GameRelax : AppCompatActivity() {
      * Displays letters on buttons.
      *
      * @param[words] a list of words from Datamuse
+     * @param[bool] is false if Datamuse did not respond, true if it did
      */
-    fun showLetters(words: MutableList<WordManager.WordInfo>) {
-        if(!words.isNullOrEmpty()) {
+    private fun showLetters(words: MutableList<WordManager.WordInfo>, bool: Boolean) {
+        val filteredList = words.filter { it.frequency > 5 }
+        if(!filteredList.isNullOrEmpty() && bool) {
             while (letterList.size < 12) {
-                var filteredList = words.filter { it.frequency > 5 }
-                var randWord = filteredList[Random.nextInt(0, filteredList.size)].word
+                val randWord = filteredList[Random.nextInt(0, filteredList.size)].word
                 if(!randWord!!.contains(" ")) {
-                    var charList = randWord!!.toCharArray().toMutableList()
+                    val charList = randWord.toCharArray().toMutableList()
                     charList.forEach {
                         letterList.add(it)
                     }
@@ -198,7 +199,7 @@ class GameRelax : AppCompatActivity() {
             setText(letterList.shuffled())
             setTags()
             startGame()
-        } else {
+        } else if(!bool) {
             runOnUiThread {
                 Toast.makeText(this, "Unable to connect to Datamuse",
                     Toast.LENGTH_LONG).show()
@@ -233,9 +234,9 @@ class GameRelax : AppCompatActivity() {
      * @param[button] button that calls the function
      */
     fun emptyClicked(button: View) {
-        var b = button as Button
+        val b = button as Button
         if(button.text != "") {
-            letterButtonList.forEach() {
+            letterButtonList.forEach {
                 if (it.tag.toString() == b.tag.toString()) {
                     runOnUiThread {
                         it.text = b.text
@@ -261,7 +262,7 @@ class GameRelax : AppCompatActivity() {
         if(lettersReady && useLetters) {
             useLetters = false
             answerString = ""
-            answerButtonList.forEach() {
+            answerButtonList.forEach {
                 if (it.text != "") {
                     answerString += it.text
                 } else {
@@ -293,7 +294,7 @@ class GameRelax : AppCompatActivity() {
      */
     fun letterClicked(button: View) {
         if(useLetters) {
-            var b = button as Button
+            val b = button as Button
             for (i in answerButtonList) {
                 if (i.text == "") {
                     runOnUiThread {
@@ -312,7 +313,7 @@ class GameRelax : AppCompatActivity() {
      *
      * @param[button] function that calls the button
      */
-    fun letterUsed(button: Button) {
+    private fun letterUsed(button: Button) {
         runOnUiThread {
             button.text = ""
         }
@@ -322,20 +323,30 @@ class GameRelax : AppCompatActivity() {
      * Checks if answer was a proper word.
      *
      * @param[answers] wordlist from Datamuse
+     * @param[bool] is false if Datamuse did not respond, true if it did
      */
-    fun checkAnswer(answers: MutableList<WordManager.WordInfo>) {
-        if (!answers.isNullOrEmpty()) {
-            var answerList = answers.filter { it.frequency >= 1.0 }
-            if (answerString.toLowerCase() == answerList[0].word.toString()) {
+    private fun checkAnswer(answers: MutableList<WordManager.WordInfo>, bool: Boolean) {
+        val filteredList = answers.filter {
+            it.frequency >= 1.0
+        }
+
+        if (!filteredList.isNullOrEmpty() && bool) {
+            if (answerString.toLowerCase() == filteredList[0].word.toString()) {
                 wordCount += pointCalculator(answerString.toLowerCase())
                 runOnUiThread {
-                    this.wordCountView.text = wordCount.toString()
+                    wordCountView.text = wordCount.toString()
                 }
             } else {
                 loseHeart()
             }
-        } else if (answers.isEmpty()) {
+        } else if (filteredList.isNullOrEmpty() && bool) {
             loseHeart()
+        } else if (!bool) {
+            runOnUiThread {
+                Toast.makeText(this, "Unable to connect to Datamuse",
+                    Toast.LENGTH_LONG).show()
+                startActivity(Intent(this, MenuRelax::class.java))
+            }
         }
         resetAnswerButtons()
     }
@@ -343,7 +354,7 @@ class GameRelax : AppCompatActivity() {
     /**
      * Resets everything in game.
      */
-    fun resetGame() {
+    private fun resetGame() {
         resetLetterButtons()
         resetAnswerButtons()
         wordCount = 0
@@ -356,8 +367,8 @@ class GameRelax : AppCompatActivity() {
     /**
      * Resets keyboard buttons to "" and sets letterReady false.
      */
-    fun resetLetterButtons() {
-        letterButtonList.forEach() {
+    private fun resetLetterButtons() {
+        letterButtonList.forEach {
             runOnUiThread {
                 it.text = ""
             }
@@ -368,7 +379,7 @@ class GameRelax : AppCompatActivity() {
     /**
      * Returns letter from answerButton back to its place on keyboard.
      */
-    fun resetAnswerButtons() {
+    private fun resetAnswerButtons() {
         for (i in answerButtonList) {
             if(i.text != "") {
                 for (j in letterButtonList) {
@@ -389,7 +400,7 @@ class GameRelax : AppCompatActivity() {
     /**
      * Adds answerButtons to a list.
      */
-    fun createAnswerButtonsList() {
+    private fun createAnswerButtonsList() {
         answerButtonList.add(l1)
         answerButtonList.add(l2)
         answerButtonList.add(l3)
@@ -404,16 +415,20 @@ class GameRelax : AppCompatActivity() {
      */
     private fun loseHeart() {
         runOnUiThread {
-            if(hearts == 3) {
-                hearts--
-                h3.setImageResource(R.drawable.heartempty)
-            } else if(hearts == 2) {
-                hearts--
-                h2.setImageResource(R.drawable.heartempty)
-            } else if(hearts == 1) {
-                hearts--
-                h1.setImageResource(R.drawable.heartempty)
-                gameOver()
+            when (hearts) {
+                3 -> {
+                    hearts--
+                    h3.setImageResource(R.drawable.heartempty)
+                }
+                2 -> {
+                    hearts--
+                    h2.setImageResource(R.drawable.heartempty)
+                }
+                1 -> {
+                    hearts--
+                    h1.setImageResource(R.drawable.heartempty)
+                    gameOver()
+                }
             }
         }
     }
@@ -434,11 +449,9 @@ class GameRelax : AppCompatActivity() {
      *
      * Tags are used to return a letter back to its place on keyboard.
      */
-    fun setTags() {
-        var x = 0
-        for (i in letterButtonList) {
+    private fun setTags() {
+        for ((x, i) in letterButtonList.withIndex()) {
             i.tag = x
-            x++
         }
     }
 
@@ -447,7 +460,7 @@ class GameRelax : AppCompatActivity() {
      *
      * @param[letterListShuffled] list of letters
      */
-    fun setText(letterListShuffled: List<Char>) {
+    private fun setText(letterListShuffled: List<Char>) {
         var x = 0
         for (i in letterButtonList) {
             runOnUiThread {

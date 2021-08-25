@@ -1,6 +1,5 @@
 package fi.tuni.dontstutter
 
-import HighscoreProfile
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,7 +8,7 @@ import android.widget.ListView
 
 /**
  * @author Juliana Pääkkönen
- * @version 2021.0823
+ * @version 2021.0825
  * @since 1.4.31
  */
 
@@ -21,8 +20,8 @@ import android.widget.ListView
  */
 
 class HighscoreRelax : AppCompatActivity() {
-    lateinit var highscoreView: ListView
-    lateinit var adapter: HighscoreAdapter
+    private lateinit var highscoreView: ListView
+    private lateinit var adapter: HighscoreAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +35,7 @@ class HighscoreRelax : AppCompatActivity() {
      *
      * @param[highscore] current highscore, loaded from preferences
      */
-    fun displayHighscore(highscore: MutableList<HighscoreProfile>) {
+    private fun displayHighscore(highscore: MutableList<HighscoreProfile>) {
         val arraylist = ArrayList(highscore)
         adapter = HighscoreAdapter(this, arraylist)
         highscoreView.adapter = adapter

@@ -9,7 +9,7 @@ import kotlin.concurrent.thread
 
 /**
  * @author Juliana Pääkkönen
- * @version 2021.0520
+ * @version 2021.0825
  * @since 1.4.31
  */
 
@@ -25,19 +25,19 @@ class WordManager {
      * @param[url] given url
      * @param[callback] function to be called
      */
-    fun createList(url: String, callback: (MutableList<WordInfo>) -> Unit) {
+    fun createList(url: String, callback: (MutableList<WordInfo>, Boolean) -> Unit) {
         thread {
             try {
-                var json = getUrl(url)
+                val json = getUrl(url)
                 val objMap = ObjectMapper()
-                var words: MutableList<WordInfo>
-                        = objMap.readValue(json, object : TypeReference<MutableList<WordInfo>>() {})
-                words.forEach{
+                val words = objMap.readValue(json,
+                    object: TypeReference<MutableList<WordInfo>>() {})
+                words.forEach {
                     it.setFrequency()
                 }
-                callback(words)
-            } catch (e: Exception) {
-                callback(mutableListOf())
+                callback(words, true)
+            } catch(e: Exception) {
+                callback(mutableListOf(), false)
             }
         }
     }
@@ -58,7 +58,7 @@ class WordManager {
          */
         fun setFrequency() {
             if(this.tags != null) {
-                var f = tags!![0].substring(2).toDouble()
+                val f = tags!![0].substring(2).toDouble()
                 this.frequency = f
             }
         }
@@ -70,9 +70,9 @@ class WordManager {
      * @param[url] given url
      * @return JSON from Datamuse API
      */
-    fun getUrl(url: String) : String? {
+    private fun getUrl(url: String): String {
         try {
-            var myUrl = URL(url)
+            val myUrl = URL(url)
             val connection = myUrl.openConnection() as HttpURLConnection
             var json = ""
             val inputStream = connection.inputStream
@@ -84,7 +84,7 @@ class WordManager {
                 }
             }
             return json
-        } catch (e: Exception ) {
+        } catch (e: Exception) {
             return ""
         }
     }

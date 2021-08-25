@@ -13,7 +13,7 @@ import kotlin.random.Random
 
 /**
  * @author Juliana Pääkkönen
- * @version 2021.0823
+ * @version 2021.0825
  * @since 1.4.31
  */
 
@@ -33,7 +33,6 @@ import kotlin.random.Random
  * @property[timerView] TextView for displaying the timer
  * @property[finalSeconds] amount of seconds in the beginning
  * @property[wordList] list of words (objects) from Datamuse (contains words and their frequency)
- * @property[pickedWord] randomly picked word from wordList
  * @property[wordManager] object to fetch words from Datamuse
  * @property[searchWordString] string that contains parameters for query for wordlist
  * @property[searchWordMax] maximum amount of words (objects) for query for wordlist
@@ -50,34 +49,33 @@ import kotlin.random.Random
  * @property[usedSearchWords] stores already used search words to ensure variation on wordlists
  */
 class GameOneMinute : AppCompatActivity() {
-    lateinit var l1: Button
-    lateinit var l2: Button
-    lateinit var l3: Button
-    lateinit var l4: Button
-    lateinit var l5: Button
-    lateinit var submit: Button
-    lateinit var h1: ImageView
-    lateinit var h2: ImageView
-    lateinit var h3: ImageView
-    lateinit var wordCountView: TextView
-    lateinit var timerView: TextView
-    val finalSeconds = 60
-    var wordList = mutableListOf<WordManager.WordInfo>()
-    var pickedWord = ""
-    val wordManager = WordManager()
-    var searchWordString = ""
-    var searchWordMax = "100"
-    var answerString = ""
-    var searchAnswerMax = "1"
-    var wordCount = 0
-    var hearts = 3
-    var runTimer = false
-    var seconds = finalSeconds
-    var firstRound = true
-    var wordReady = false
-    var guessedWords = mutableListOf<String>()
-    var usedWords = mutableListOf<String>()
-    var usedSearchWords = mutableListOf<String>()
+    private lateinit var l1: Button
+    private lateinit var l2: Button
+    private lateinit var l3: Button
+    private lateinit var l4: Button
+    private lateinit var l5: Button
+    private lateinit var submit: Button
+    private lateinit var h1: ImageView
+    private lateinit var h2: ImageView
+    private lateinit var h3: ImageView
+    private lateinit var wordCountView: TextView
+    private lateinit var timerView: TextView
+    private val finalSeconds = 60
+    private var wordList = mutableListOf<WordManager.WordInfo>()
+    private val wordManager = WordManager()
+    private var searchWordString = ""
+    private var searchWordMax = "100"
+    private var answerString = ""
+    private var searchAnswerMax = "1"
+    private var wordCount = 0
+    private var hearts = 3
+    private var runTimer = false
+    private var seconds = finalSeconds
+    private var firstRound = true
+    private var wordReady = false
+    private var guessedWords = mutableListOf<String>()
+    private var usedWords = mutableListOf<String>()
+    private var usedSearchWords = mutableListOf<String>()
 
     /**
      * Calls the super class and sets user interface layout.
@@ -87,17 +85,17 @@ class GameOneMinute : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.game_one_minute)
-        this.l1 = findViewById(R.id.L1)
-        this.l2 = findViewById(R.id.L2)
-        this.l3 = findViewById(R.id.L3)
-        this.l4 = findViewById(R.id.L4)
-        this.l5 = findViewById(R.id.L5)
-        this.submit = findViewById(R.id.submit)
-        this.h1 = findViewById(R.id.h1)
-        this.h2 = findViewById(R.id.h2)
-        this.h3 = findViewById(R.id.h3)
-        this.wordCountView = findViewById(R.id.wordcount)
-        this.timerView = findViewById(R.id.timer)
+        l1 = findViewById(R.id.L1)
+        l2 = findViewById(R.id.L2)
+        l3 = findViewById(R.id.L3)
+        l4 = findViewById(R.id.L4)
+        l5 = findViewById(R.id.L5)
+        submit = findViewById(R.id.submit)
+        h1 = findViewById(R.id.h1)
+        h2 = findViewById(R.id.h2)
+        h3 = findViewById(R.id.h3)
+        wordCountView = findViewById(R.id.wordcount)
+        timerView = findViewById(R.id.timer)
     }
 
     /**
@@ -147,36 +145,32 @@ class GameOneMinute : AppCompatActivity() {
      *
      * Is called from WordManager.
      *
-     * @param[words] a list of words (objects) from Datamuse
+     * @param[wordList] a list of words (objects) from Datamuse
+     * @param[bool] is false if Datamuse did not respond, true if it did
      */
-    private fun pickWord(words: MutableList<WordManager.WordInfo>) {
-        if(!words.isNullOrEmpty()) {
+    private fun pickWord(wordList: MutableList<WordManager.WordInfo>, bool: Boolean) {
+        val filteredList = wordList.filter {
+            it.frequency > 5
+        }
+        if(!filteredList.isNullOrEmpty() && bool) {
             if(firstRound) {
                 firstRound = false
                 runTimer = true
                 timer()
             }
-            words.forEach {
-                wordList.add(it)
-            }
-            val filterList = wordList.filter { it.frequency > 5 }
-            var wordFound = false
-
-            while (!wordFound) {
-                val randWord = filterList[Random.nextInt(0, filterList.size)]
+            while(!wordReady) {
+                val randWord = filteredList[Random.nextInt(0, filteredList.size)]
                 if (randWord.word != null && !usedWords.contains(randWord.word) &&
                         !randWord.word!!.contains(" ")) {
-                    pickedWord = randWord.word!!
                     usedWords.add(randWord.word!!)
-                    wordFound = true
                     runOnUiThread {
-                        this.l2.text = pickedWord.get(1).toString()
-                        this.l5.text = pickedWord.get(4).toString()
+                        l2.text = randWord.word!![1].toString()
+                        l5.text = randWord.word!![4].toString()
                     }
                     wordReady = true
                 }
             }
-        } else {
+        } else if(!bool) {
             runOnUiThread {
                 Toast.makeText(this, "Unable to connect to Datamuse",
                             Toast.LENGTH_LONG).show()
@@ -192,15 +186,18 @@ class GameOneMinute : AppCompatActivity() {
      * by Datamuse API. Function is called from WordManager.
      *
      * @param[answers] a list containing word(s) from Datamuse
+     * @param[bool] is false if Datamuse did not respond, true if it did
      */
-    private fun checkAnswer(answers: MutableList<WordManager.WordInfo>) {
-        val answerList = answers.filter {it.frequency >= 1.0}
-        if(!answerList.isNullOrEmpty()) {
-            if (answerString.toLowerCase() == answerList[0].word.toString()) {
+    private fun checkAnswer(answers: MutableList<WordManager.WordInfo>, bool: Boolean) {
+        val filteredList = answers.filter {
+            it.frequency >= 1.0
+        }
+        if(!filteredList.isNullOrEmpty() && bool) {
+            if (answerString.toLowerCase() == filteredList[0].word.toString()) {
                 wordCount += pointCalculator(answerString.toLowerCase())
                 guessedWords.add(answerString)
                 runOnUiThread {
-                    this.wordCountView.text = wordCount.toString()
+                    wordCountView.text = wordCount.toString()
                 }
                 resetWords()
                 newWord()
@@ -209,10 +206,16 @@ class GameOneMinute : AppCompatActivity() {
                 resetWords()
                 newWord()
             }
-        } else {
+        } else if (filteredList.isNullOrEmpty() && bool) {
             loseHeart()
             resetWords()
             newWord()
+        } else if (!bool) {
+            runOnUiThread {
+                Toast.makeText(this, "Unable to connect to Datamuse",
+                    Toast.LENGTH_LONG).show()
+                startActivity(Intent(this, MenuOneMinute::class.java))
+            }
         }
     }
 
@@ -314,15 +317,19 @@ class GameOneMinute : AppCompatActivity() {
      */
     fun letterClicked(button: View) {
         val b = button as Button
-        if(l1.text == "") {
-            l1.text = b.text
-            return
-        } else if (l3.text == "") {
-            l3.text = b.text
-            return
-        } else if (l4.text == "") {
-            l4.text = b.text
-            return
+        when {
+            l1.text == "" -> {
+                l1.text = b.text
+                return
+            }
+            l3.text == "" -> {
+                l3.text = b.text
+                return
+            }
+            l4.text == "" -> {
+                l4.text = b.text
+                return
+            }
         }
     }
 
@@ -333,17 +340,21 @@ class GameOneMinute : AppCompatActivity() {
      */
     private fun loseHeart() {
         runOnUiThread {
-            if(hearts == 3) {
-                hearts--
-                h3.setImageResource(R.drawable.heartempty)
-            } else if(hearts == 2) {
-                hearts--
-                h2.setImageResource(R.drawable.heartempty)
-            } else if(hearts == 1) {
-                hearts--
-                h1.setImageResource(R.drawable.heartempty)
-                runTimer = false
-                gameOver()
+            when (hearts) {
+                3 -> {
+                    hearts--
+                    h3.setImageResource(R.drawable.heartempty)
+                }
+                2 -> {
+                    hearts--
+                    h2.setImageResource(R.drawable.heartempty)
+                }
+                1 -> {
+                    hearts--
+                    h1.setImageResource(R.drawable.heartempty)
+                    runTimer = false
+                    gameOver()
+                }
             }
         }
     }
@@ -365,7 +376,6 @@ class GameOneMinute : AppCompatActivity() {
      */
     private fun resetWords() {
         runOnUiThread {
-            pickedWord = ""
             answerString = ""
             l1.text = ""
             l2.text = ""
@@ -401,7 +411,7 @@ class GameOneMinute : AppCompatActivity() {
             while(runTimer) {
                 seconds--
                 runOnUiThread {
-                    this.timerView.text = seconds.toString()
+                    timerView.text = seconds.toString()
                 }
                 if(seconds <= 0) {
                     runTimer = false

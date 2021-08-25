@@ -4,7 +4,7 @@ import kotlin.random.Random
 
 /**
  * @author Juliana Pääkkönen
- * @version 2021.0520
+ * @version 2021.0825
  * @since 1.4.31
  */
 
@@ -14,6 +14,6 @@ import kotlin.random.Random
  * @return a random vowel as a string
  */
 fun getRandomVowel(): String {
-    var vowelList = listOf("a","e","i","o","u","y")
+    val vowelList = listOf("a","e","i","o","u","y")
     return vowelList.shuffled()[Random.nextInt(0, vowelList.size)]
 }

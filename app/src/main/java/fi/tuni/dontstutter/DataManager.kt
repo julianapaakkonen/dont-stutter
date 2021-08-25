@@ -1,6 +1,5 @@
 package fi.tuni.dontstutter
 
-import HighscoreProfile
 import android.app.Activity
 import android.content.Context
 import com.fasterxml.jackson.core.type.TypeReference
@@ -24,9 +23,9 @@ fun Activity.loadHighscore(key: String, callback: (MutableList<HighscoreProfile>
     val highScore = pref.getString(key, "")
 
     try {
-        var highScoreList = ObjectMapper().readValue(highScore,
+        val highScoreList = ObjectMapper().readValue(highScore,
                             object : TypeReference<MutableList<HighscoreProfile>>() {})
-        var listInOrder = orderList(highScoreList)
+        val listInOrder = orderList(highScoreList)
         callback(listInOrder)
     } catch(e: Exception) {
         callback(mutableListOf())
@@ -48,8 +47,8 @@ fun Activity.saveHighscore(key: String, highscore: HighscoreProfile) {
     }
 
     list.add(highscore)
-    var topTen = orderList(list)
-    var json: String = ObjectMapper().writeValueAsString(topTen)
+    val topTen = orderList(list)
+    val json: String = ObjectMapper().writeValueAsString(topTen)
     val pref = this.getSharedPreferences(
             key, Context.MODE_PRIVATE) ?: return
     with (pref.edit()) {
@@ -114,7 +113,7 @@ fun Activity.loadProfile(key: String, callback: (MutableList<PlayerProfile>) -> 
     val profile = pref.getString(key, "")
 
     try {
-        var profileList = ObjectMapper().readValue(profile,
+        val profileList = ObjectMapper().readValue(profile,
                 object : TypeReference<MutableList<PlayerProfile>>() {})
         callback(profileList)
     } catch(e: Exception) {
@@ -134,7 +133,7 @@ fun Activity.saveProfile(key: String, profile: PlayerProfile) {
         list = it
     }
     list.add(profile)
-    var json: String = ObjectMapper().writeValueAsString(list)
+    val json: String = ObjectMapper().writeValueAsString(list)
     val pref = this.getSharedPreferences(
             key, Context.MODE_PRIVATE) ?: return
     with (pref.edit()) {

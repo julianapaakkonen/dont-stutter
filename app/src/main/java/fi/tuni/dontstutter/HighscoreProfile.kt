@@ -1,9 +1,10 @@
-import fi.tuni.dontstutter.R
+package fi.tuni.dontstutter
+
 import java.util.*
 
 /**
  * @author Juliana Pääkkönen
- * @version 2021.0520
+ * @version 2021.0825
  * @since 1.4.31
  */
 
