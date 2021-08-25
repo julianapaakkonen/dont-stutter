@@ -32,36 +32,27 @@
 
 <h2>Code example</h2>
 
-<p>PickWord is one of the most important functions in One Minute mode. It is responsible for delivering the two letters from which the player has to guess a word. PickWord is called when a list of words is received from Datamuse API. This function chooses a word that meets certain requirements and shows two letters to the player. This procedure ensures that there is always at least one common word in the English language that fits the letters displayed on screen.</p>
+<p>PickWord is one of the most important functions in One Minute mode. It is responsible for delivering two letters from which you have to guess a word. PickWord is called when a list of words is received from Datamuse API. This function chooses a word that meets certain requirements and shows two letters on screen. This procedure ensures that there is always at least one common English word that fits the letters displayed on screen.</p>
 <p>Here is a snippet of PickWord:</p>
 
-    if(!words.isNullOrEmpty()) {
+    val filteredList = wordList.filter {
+        it.frequency > 5
+    }
+    
+    if(!filteredList.isNullOrEmpty() && bool) {
         if(firstRound) {
             firstRound = false
             runTimer = true
             timer()
         }
-  
-        words.forEach {
-            wordList.add(it)
-        }
-        
-        val filterList = wordList.filter {
-            it.frequency > 5
-        }
-        
-        var wordFound = false
-
-        while (!wordFound) {
-            val randWord = filterList[Random.nextInt(0, filterList.size)]
-            if (randWord.word != null && !usedWords.contains(randWord.word) &&
-                !randWord.word!!.contains(" ")) {
-                pickedWord = randWord.word!!
+        while(!wordReady) {
+            val randWord = filteredList[Random.nextInt(0, filteredList.size)]
+            if(randWord.word != null && !usedWords.contains(randWord.word) &&
+                    !randWord.word!!.contains(" ")) {
                 usedWords.add(randWord.word!!)
-                wordFound = true
                 runOnUiThread {
-                    this.l2.text = pickedWord[1].toString()
-                    this.l5.text = pickedWord[4].toString()
+                    l2.text = randWord.word!![1].toString()
+                    l5.text = randWord.word!![4].toString()
                 }
                 wordReady = true
             }
