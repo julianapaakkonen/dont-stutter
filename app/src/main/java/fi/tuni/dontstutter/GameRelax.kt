@@ -2,6 +2,7 @@ package fi.tuni.dontstutter
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
@@ -54,6 +55,7 @@ import kotlin.random.Random
  * @property[letterButtonList] list for keyboard buttons
  * @property[answerButtonList] list for answerButtons
  * @property[guessedWords] list of already guessed words
+ * @propery[usedWords] stores already used words so they won't appear again
  */
 
 class GameRelax : AppCompatActivity() {
@@ -92,6 +94,7 @@ class GameRelax : AppCompatActivity() {
     private var letterButtonList = mutableListOf<Button>()
     private var answerButtonList = mutableListOf<Button>()
     private var guessedWords = mutableListOf<String>()
+    private var usedWords = mutableListOf<String>()
 
     /**
      * Calls the super class and sets user interface layout.
@@ -185,16 +188,22 @@ class GameRelax : AppCompatActivity() {
      * @param[bool] is false if Datamuse did not respond, true if it did
      */
     private fun showLetters(words: MutableList<WordManager.WordInfo>, bool: Boolean) {
-        val filteredList = words.filter { it.frequency > 5 }
+        val filteredList = words.filter {
+            it.frequency > 5
+        }
         if(!filteredList.isNullOrEmpty() && bool) {
             while (letterList.size < 12) {
                 val randWord = filteredList[Random.nextInt(0, filteredList.size)].word
-                if(!randWord!!.contains(" ")) {
+                if(!randWord!!.contains(" ") && !usedWords.contains(randWord)) {
+                    usedWords.add(randWord)
                     val charList = randWord.toCharArray().toMutableList()
                     charList.forEach {
                         letterList.add(it)
                     }
                 }
+            }
+            if(!letterList.contains('s')) {
+                letterList[Random.nextInt(0, letterList.size)] = 's'
             }
             setText(letterList.shuffled())
             setTags()
@@ -362,6 +371,7 @@ class GameRelax : AppCompatActivity() {
         wordCountView.text = wordCount.toString()
         letterList.clear()
         guessedWords.clear()
+        usedWords.clear()
     }
 
     /**
