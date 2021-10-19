@@ -4,8 +4,8 @@
 <h2>Overview</h2>
 
 <p><strong>Don't Stutter</strong> is a mobile game for Android where you try to guess as many words as you can. There are two modes: One Minute mode and Relax mode.</p>
-<p><strong>One Minute mode</strong> was done as a project for my native mobile app development studies. In One Minute mode you have exactly 60 seconds to guess five letter words and collect points.</p>
-<p><strong>Relax mode</strong> was done later as a free time project and it’s also a word game but you have no time limits!</p>
+<p><strong>One Minute mode</strong> was done as a project for my Native Mobile App Development studies (in spring 2021). In One Minute mode you have exactly 60 seconds to guess five letter words and collect points.</p>
+<p><strong>Relax mode</strong> was done later as a free time project (in summer 2021) and it’s also a word game but you have no time limits!</p>
 
 
 <h2>API</h2>
